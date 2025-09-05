@@ -76,6 +76,18 @@
     height: auto;
     display: inline-block;
   }
+  /* Autores */
+  #autores {
+    font-style: italic;
+    color: #555;
+    margin-top: -10px;
+    margin-bottom: 30px;
+    text-align: left;
+    transition: color 0.5s ease;
+  }
+  [data-theme="dark"] #autores {
+    color: #bbb;
+  }
   /* Botón modo oscuro */
   #btn-toggle-theme {
     position: fixed;
@@ -100,7 +112,9 @@
 <body>
 
 <h1>Simulación y Cálculos del Mecanismo de 4 Barras</h1>
-<p style="font-style: italic; color: #555; margin-top: -10px; text-align: left;">Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive</p>
+<div id="autores">
+  Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive
+</div>
 
 <nav>
   <a href="#introduccion" class="active">Introducción</a>
@@ -156,7 +170,6 @@
 <button id="btn-toggle-theme" aria-label="Cambiar tema">Modo oscuro</button>
 
 <script>
-// Cambiar tema claro/oscuro y memorizar preferencia
 const toggleButton = document.getElementById('btn-toggle-theme');
 const currentTheme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-theme', currentTheme);
