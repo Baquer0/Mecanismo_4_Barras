@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<title>Simulación de Mecanismo 4 Barras - Proyecto con Menú Lateral</title>
+<title>Simulación de Mecanismo 4 Barras - Proyecto con Menú y Modo Oscuro</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -76,6 +76,7 @@
     color: var(--color-links-hover);
     background-color: rgba(0, 123, 204, 0.1);
   }
+  /* Botón flecha para abrir/cerrar menú */
   #toggle-btn {
     position: absolute;
     top: 10px;
@@ -91,14 +92,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
+    font-size: 18px;
+    line-height: 1;
     user-select: none;
     transition: background-color 0.3s ease;
   }
   #toggle-btn:hover {
     background-color: var(--color-links-hover);
   }
-  /* Contenido principal */
+  /* Ajuste de contenido principal */
   #main-content {
     margin-left: var(--menu-width);
     padding: 40px 30px;
@@ -131,12 +133,43 @@
     height: auto;
     display: inline-block;
   }
+  /* Autores */
+  #autores {
+    font-style: italic;
+    color: #555;
+    margin-top: -10px;
+    margin-bottom: 30px;
+    text-align: left;
+    transition: color 0.5s ease;
+  }
+  [data-theme="dark"] #autores {
+    color: #bbb;
+  }
+  /* Botón modo oscuro */
+  #btn-toggle-theme {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    padding: 12px 18px;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--color-principal);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+  }
+  #btn-toggle-theme:hover {
+    background-color: var(--color-links-hover);
+  }
 </style>
 </head>
-<body data-theme="light">
+<body>
 
 <div id="sidebar">
-  <button id="toggle-btn" aria-label="Alternar menú">&#9776;</button>
+  <button id="toggle-btn" aria-label="Alternar menú" title="Abrir menú">&#9654;</button> <!-- flecha derecha inicialmente -->
   <nav>
     <a href="#introduccion" class="active" title="Introducción">Introducción</a>
     <a href="#simulacion_calculos" title="Simulación y Cálculos">Simulación</a>
@@ -147,7 +180,9 @@
 
 <div id="main-content">
   <h1>Simulación y Cálculos del Mecanismo de 4 Barras</h1>
-  <p style="font-style: italic; color: #555; margin-top: -10px; text-align: left;">Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive</p>
+  <div id="autores">
+    Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive
+  </div>
 
   <section id="introduccion">
     <h2>Introducción</h2>
@@ -194,17 +229,51 @@
   </section>
 </div>
 
+<button id="btn-toggle-theme" aria-label="Cambiar tema">Modo oscuro</button>
+
 <script>
-// Alternar colapso del menú lateral
+// Toggle menú con flecha y cambio de dirección
 const sidebar = document.getElementById('sidebar');
 const toggleBtn = document.getElementById('toggle-btn');
-const navLinks = sidebar.querySelectorAll('nav a');
 
 toggleBtn.addEventListener('click', () => {
   sidebar.classList.toggle('collapsed');
+  if (sidebar.classList.contains('collapsed')) {
+    toggleBtn.innerHTML = '&#9654;'; // flecha derecha para abrir
+    toggleBtn.title = 'Abrir menú';
+  } else {
+    toggleBtn.innerHTML = '&#9664;'; // flecha izquierda para cerrar
+    toggleBtn.title = 'Cerrar menú';
+  }
+});
+
+// Inicializa icono acorde al estado (abierto inicialmente)
+if (!sidebar.classList.contains('collapsed')) {
+  toggleBtn.innerHTML = '&#9664;';
+  toggleBtn.title = 'Cerrar menú';
+}
+
+// Modo oscuro toggle
+const btnToggleTheme = document.getElementById('btn-toggle-theme');
+const currentTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', currentTheme);
+btnToggleTheme.textContent = currentTheme === 'dark' ? 'Modo claro' : 'Modo oscuro';
+
+btnToggleTheme.addEventListener('click', () => {
+  let theme = document.documentElement.getAttribute('data-theme');
+  if (theme === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    btnToggleTheme.textContent = 'Modo oscuro';
+    localStorage.setItem('theme', 'light');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    btnToggleTheme.textContent = 'Modo claro';
+    localStorage.setItem('theme', 'dark');
+  }
 });
 
 // Resaltar enlace activo con scroll
+const navLinks = sidebar.querySelectorAll('nav a');
 window.addEventListener('scroll', () => {
   let current = '';
   document.querySelectorAll('section').forEach(section => {
@@ -221,5 +290,6 @@ window.addEventListener('scroll', () => {
   });
 });
 </script>
+
 </body>
 </html>
