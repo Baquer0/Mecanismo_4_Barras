@@ -86,7 +86,7 @@ xA = a * cosd(450 - theta2); yA = a * sind(450 - theta2);
             <li><a href="simulacion.m">Animación completa</a></li>
         </ul>
         <p>Visualización de la animación generada en MATLAB:</p>
-        <img src="imgs/animacion.gif" alt="Animación simulación mecanismo" class="simulacion">
+        <img src="Imagenes/simulacion_mecanismo.gif" alt="Simulación del mecanismo" class="simulacion">
     </section>
     <section id="contacto">
         <h2>Contacto</h2>
@@ -98,10 +98,4 @@ xA = a * cosd(450 - theta2); yA = a * sind(450 - theta2);
         document.querySelectorAll('nav a').forEach(link => {
             link.addEventListener('click', event => {
                 event.preventDefault();
-                const id = link.getAttribute('href').substring(1);
-                document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-            });
-        });
-    </script>
-</body>
-</html>
+                const id = link.get
