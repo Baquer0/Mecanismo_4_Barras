@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Simulación de Mecanismo 4 Barras - Proyecto</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9; color: #333; }
+        h1, h2 { color: #005f9e; }
+        nav a { margin-right: 15px; text-decoration: none; color: #007acc; }
+        nav a:hover { text-decoration: underline; }
+        section { margin-bottom: 30px; }
+        pre { background-color: #e5e7eb; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+
+    <h1>Simulación y Cálculos del Mecanismo de 4 Barras</h1>
+    <nav>
+        <a href="#introduccion">Introducción</a>
+        <a href="#codigo">Código</a>
+        <a href="#simulacion">Simulación</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+
+    <section id="introduccion">
+        <h2>Introducción</h2>
+        <p>Este proyecto contiene el análisis, simulación y gráficos de un mecanismo de manivela-biela-corredera vertical.</p>
+        <p>Aquí podrás encontrar el código MATLAB y resultados de análisis realizados.</p>
+    </section>
+
+    <section id="codigo">
+        <h2>Código Ejemplo</h2>
+        <p>A continuación un fragmento representativo del código MATLAB para graficar la segunda configuración:</p>
+        <pre>
+% Parámetros
+a = 5; b = 12; theta2 = 305;
+% Cálculo punto A
+xA = a * cosd(450 - theta2); yA = a * sind(450 - theta2);
+% ...
+        </pre>
+    </section>
+
+    <section id="simulacion">
+        <h2>Simulación</h2>
+        <p>Para visualizar las simulaciones, descarga los archivos y ejecútalos en MATLAB.</p>
+        <ul>
+            <li><a href="primera_configuracion.m">Primera Configuración</a></li>
+            <li><a href="segunda_configuracion.m">Segunda Configuración</a></li>
+            <li><a href="simulacion.m">Animación completa</a></li>
+        </ul>
+    </section>
+
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <p>Creado por: Tu Nombre</p>
+        <p>Correo: tu_email@ejemplo.com</p>
+    </section>
+
+</body>
+</html>
