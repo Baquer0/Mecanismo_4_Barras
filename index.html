@@ -2,9 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<title>Simulación de Mecanismo 4 Barras - Proyecto</title>
+<title>Simulación de Mecanismo 4 Barras - Proyecto con Menú Lateral</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
   :root {
     --color-fondo: #f4f4f9;
     --color-texto: #333;
@@ -13,6 +14,8 @@
     --color-links-hover: #003d66;
     --color-nav-bg: #f4f4f9;
     --color-section-bg: white;
+    --menu-width: 220px;
+    --menu-collapsed-width: 60px;
   }
   [data-theme="dark"] {
     --color-fondo: #121212;
@@ -25,37 +28,89 @@
   }
   body {
     font-family: 'Roboto', Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
     background-color: var(--color-fondo);
     color: var(--color-texto);
     line-height: 1.6;
     text-align: justify;
     transition: background-color 0.5s ease, color 0.5s ease;
+    display: flex;
+  }
+  /* Menú lateral */
+  #sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: var(--menu-width);
+    height: 100vh;
+    background-color: var(--color-nav-bg);
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    transition: width 0.3s ease;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  #sidebar.collapsed {
+    width: var(--menu-collapsed-width);
+  }
+  #sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  #sidebar nav a {
+    color: var(--color-links);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 10px 15px;
+    border-radius: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  #sidebar nav a:hover,
+  #sidebar nav a.active {
+    color: var(--color-links-hover);
+    background-color: rgba(0, 123, 204, 0.1);
+  }
+  #toggle-btn {
+    position: absolute;
+    top: 10px;
+    right: -25px;
+    background-color: var(--color-principal);
+    color: white;
+    border-radius: 50%;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+  #toggle-btn:hover {
+    background-color: var(--color-links-hover);
+  }
+  /* Contenido principal */
+  #main-content {
+    margin-left: var(--menu-width);
+    padding: 40px 30px;
+    flex-grow: 1;
+    transition: margin-left 0.3s ease;
+  }
+  #sidebar.collapsed + #main-content {
+    margin-left: var(--menu-collapsed-width);
   }
   h1, h2 {
     color: var(--color-principal);
     text-align: left;
-  }
-  nav {
-    position: sticky;
-    top: 0;
-    background: var(--color-nav-bg);
-    padding: 15px 0;
-    border-bottom: 1px solid #ccc;
-    z-index: 100;
-    margin-bottom: 30px;
-    transition: background-color 0.5s ease;
-  }
-  nav a {
-    margin-right: 20px;
-    text-decoration: none;
-    color: var(--color-links);
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  nav a:hover, nav a.active {
-    color: var(--color-links-hover);
-    text-decoration: underline;
   }
   section {
     margin-bottom: 40px;
@@ -76,118 +131,95 @@
     height: auto;
     display: inline-block;
   }
-  /* Autores */
-  #autores {
-    font-style: italic;
-    color: #555;
-    margin-top: -10px;
-    margin-bottom: 30px;
-    text-align: left;
-    transition: color 0.5s ease;
-  }
-  [data-theme="dark"] #autores {
-    color: #bbb;
-  }
-  /* Botón modo oscuro */
-  #btn-toggle-theme {
-    position: fixed;
-    bottom: 25px;
-    right: 25px;
-    padding: 12px 18px;
-    border: none;
-    border-radius: 50px;
-    background-color: var(--color-principal);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: background-color 0.3s ease;
-    z-index: 1000;
-  }
-  #btn-toggle-theme:hover {
-    background-color: var(--color-links-hover);
-  }
 </style>
 </head>
-<body>
+<body data-theme="light">
 
-<h1>Simulación y Cálculos del Mecanismo de 4 Barras</h1>
-<div id="autores">
-  Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive
+<div id="sidebar">
+  <button id="toggle-btn" aria-label="Alternar menú">&#9776;</button>
+  <nav>
+    <a href="#introduccion" class="active" title="Introducción">Introducción</a>
+    <a href="#simulacion_calculos" title="Simulación y Cálculos">Simulación</a>
+    <a href="#aplicacion" title="Aplicación">Aplicación</a>
+    <a href="#documentacion" title="Documentación">Documentación</a>
+  </nav>
 </div>
 
-<nav>
-  <a href="#introduccion" class="active">Introducción</a>
-  <a href="#simulacion_calculos">Simulación</a>
-  <a href="#aplicacion">Aplicación</a>
-  <a href="#documentacion">Documentación</a>
-</nav>
+<div id="main-content">
+  <h1>Simulación y Cálculos del Mecanismo de 4 Barras</h1>
+  <p style="font-style: italic; color: #555; margin-top: -10px; text-align: left;">Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive</p>
 
-<section id="introduccion">
-  <h2>Introducción</h2>
-  <p>Este proyecto universitario se enfoca en el análisis cinemático de un mecanismo de cuatro barras con manivela y corredera vertical. El objetivo principal es estudiar el desplazamiento de la pieza “d” de la corredera, identificando los valores máximos y mínimos que puede alcanzar dentro de su ciclo de movimiento.</p>
-  <p>Se aplican dos enfoques complementarios: el método gráfico y el método analítico. Primero, se determina el intervalo de recorrido posible para la corredera usando el método gráfico. Luego, se valida y profundiza el análisis mediante el método analítico, resolviendo ecuaciones trigonométricas para calcular ángulos y posiciones.</p>
-  <p>Además, con un mismo valor del ángulo de entrada, se exploran las dos configuraciones físicamente posibles del mecanismo y se calculan para cada caso los ángulos y desplazamientos correspondientes, mostrando cómo un solo valor de entrada puede aportar soluciones múltiples. El análisis completo aporta criterios de diseño y comprensión del comportamiento de mecanismos de cuatro barras en aplicaciones reales.</p>
-</section>
-
-<section id="simulacion_calculos">
-  <h2>Simulación y Cálculos - Realizados en Matlab</h2>
-  <section id="simulacion_mecanismo">
-    <h3>Simulación del mecanismo</h3>
-    <p>A continuación se presenta la animación generada a partir de la simulación en MATLAB del mecanismo de cuatro barras:</p>
-    <img src="Imagenes/simulacion_mecanismo.gif" alt="Simulación del mecanismo en MATLAB" />
+  <section id="introduccion">
+    <h2>Introducción</h2>
+    <p>Este proyecto universitario se enfoca en el análisis cinemático de un mecanismo de cuatro barras con manivela y corredera vertical. El objetivo principal es estudiar el desplazamiento de la pieza “d” de la corredera, identificando los valores máximos y mínimos que puede alcanzar dentro de su ciclo de movimiento.</p>
+    <p>Se aplican dos enfoques complementarios: el método gráfico y el método analítico. Primero, se determina el intervalo de recorrido posible para la corredera usando el método gráfico. Luego, se valida y profundiza el análisis mediante el método analítico, resolviendo ecuaciones trigonométricas para calcular ángulos y posiciones.</p>
+    <p>Además, con un mismo valor del ángulo de entrada, se exploran las dos configuraciones físicamente posibles del mecanismo y se calculan para cada caso los ángulos y desplazamientos correspondientes, mostrando cómo un solo valor de entrada puede aportar soluciones múltiples. El análisis completo aporta criterios de diseño y comprensión del comportamiento de mecanismos de cuatro barras en aplicaciones reales.</p>
   </section>
-  <section id="calculos_posiciones_extremas">
-    <h3>Cálculos posiciones extremas y desplazamientos de d</h3>
-    <section id="posiciones_maximas">
-      <img src="Imagenes/calculos_posicion_maxima.png" alt="Cálculos posición máxima realizados en MATLAB" />
+
+  <section id="simulacion_calculos">
+    <h2>Simulación y Cálculos - Realizados en Matlab</h2>
+    <section id="simulacion_mecanismo">
+      <h3>Simulación del mecanismo</h3>
+      <p>A continuación se presenta la animación generada a partir de la simulación en MATLAB del mecanismo de cuatro barras:</p>
+      <img src="Imagenes/simulacion_mecanismo.gif" alt="Simulación del mecanismo en MATLAB" />
     </section>
-    <section id="grafica_primera_configuracion">
-      <div>
-        <h4>Gráfica de la primera configuración para θ2 = 305°</h4>
-        <img src="Imagenes/grafica_primera_configuracion.png" alt="Gráfica primera configuración para θ2 = 305°" />
-      </div>
-    </section>
-    <section id="grafica_segunda_configuracion">
-      <div>
-        <h4>Gráfica de la segunda configuración para θ2 = 305°</h4>
-        <img src="Imagenes/grafica_segunda_configuracion.png" alt="Gráfica segunda configuración para θ2 = 305°" />
-      </div>
+    <section id="calculos_posiciones_extremas">
+      <h3>Cálculos posiciones extremas y desplazamientos de d</h3>
+      <section id="posiciones_maximas">
+        <img src="Imagenes/calculos_posicion_maxima.png" alt="Cálculos posición máxima realizados en MATLAB" />
+      </section>
+      <section id="grafica_primera_configuracion">
+        <div>
+          <h4>Gráfica de la primera configuración para θ2 = 305°</h4>
+          <img src="Imagenes/grafica_primera_configuracion.png" alt="Gráfica primera configuración para θ2 = 305°" />
+        </div>
+      </section>
+      <section id="grafica_segunda_configuracion">
+        <div>
+          <h4>Gráfica de la segunda configuración para θ2 = 305°</h4>
+          <img src="Imagenes/grafica_segunda_configuracion.png" alt="Gráfica segunda configuración para θ2 = 305°" />
+        </div>
+      </section>
     </section>
   </section>
-</section>
 
-<section id="aplicacion">
-  <h2>Aplicación</h2>
-</section>
+  <section id="aplicacion">
+    <h2>Aplicación</h2>
+  </section>
 
-<section id="documentacion">
-  <h2>Documentación</h2>
-  <p>Enlace para acceder a los scripts en Matlab donde se realizan los cálculos, gráficas y simulaciones respectivas al mecanismo: <br />
-  <a href="https://drive.mathworks.com/sharing/8b20918a-19a0-4557-b3a3-0070ccf150a4" target="_blank" rel="noopener noreferrer" style="color: var(--color-links); text-decoration: underline;">Abrir carpeta MATLAB Drive</a></p>
-</section>
-
-<button id="btn-toggle-theme" aria-label="Cambiar tema">Modo oscuro</button>
+  <section id="documentacion">
+    <h2>Documentación</h2>
+    <p>Enlace para acceder a los scripts en Matlab donde se realizan los cálculos, gráficas y simulaciones respectivas al mecanismo: <br />
+    <a href="https://drive.mathworks.com/sharing/8b20918a-19a0-4557-b3a3-0070ccf150a4" target="_blank" rel="noopener noreferrer" style="color: var(--color-links); text-decoration: underline;">Abrir carpeta MATLAB Drive</a></p>
+  </section>
+</div>
 
 <script>
-const toggleButton = document.getElementById('btn-toggle-theme');
-const currentTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', currentTheme);
-toggleButton.textContent = currentTheme === 'dark' ? 'Modo claro' : 'Modo oscuro';
+// Alternar colapso del menú lateral
+const sidebar = document.getElementById('sidebar');
+const toggleBtn = document.getElementById('toggle-btn');
+const navLinks = sidebar.querySelectorAll('nav a');
 
-toggleButton.addEventListener('click', () => {
-  let theme = document.documentElement.getAttribute('data-theme');
-  if (theme === 'dark') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    toggleButton.textContent = 'Modo oscuro';
-    localStorage.setItem('theme', 'light');
-  } else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    toggleButton.textContent = 'Modo claro';
-    localStorage.setItem('theme', 'dark');
-  }
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('collapsed');
+});
+
+// Resaltar enlace activo con scroll
+window.addEventListener('scroll', () => {
+  let current = '';
+  document.querySelectorAll('section').forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (pageYOffset >= sectionTop - 60) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === '#' + current) {
+      link.classList.add('active');
+    }
+  });
 });
 </script>
-
 </body>
 </html>
