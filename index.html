@@ -11,10 +11,11 @@
             background-color: #f4f4f9;
             color: #333;
             line-height: 1.6;
-            text-align: justify; /* Justifica todo el texto */
+            text-align: left; /* Alínea todo a la izquierda */
         }
         h1, h2 {
             color: #005f9e;
+            text-align: left; /* Asegurar que encabezados estén a la izquierda */
         }
         nav {
             position: sticky;
@@ -47,25 +48,24 @@
             box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
         }
         img {
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
             max-width: 100%;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             margin-top: 15px;
             height: auto;
+            display: inline-block;
+            /* No centrar imágenes */
         }
-        /* Centrar títulos de gráficas junto con las imágenes */
+        /* Quitar centrado para títulos de las gráficas */
         #grafica_primera_configuracion div,
         #grafica_segunda_configuracion div {
-            text-align: center;
+            text-align: left;
         }
     </style>
 </head>
 <body>
     <h1>Simulación y Cálculos del Mecanismo de 4 Barras</h1>
-    <p style="font-style: italic; color: #555; margin-top: -10px;">Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive</p>
+    <p style="font-style: italic; color: #555; margin-top: -10px; text-align: left;">Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive</p>
     <nav>
         <a href="#introduccion">Introducción</a>
         <a href="#simulacion_calculos">Simulación</a>
