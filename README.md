@@ -5,5 +5,4 @@ Hecho por David Quiñones Angarita y Juan Sebastian Baquero Piraquive.
 
 ## Archivos
 
-- `SimulacionPiston.m`: Código de animación del mecanismo.
-- `CalculosPiston.m`: Cálculos y gráficas de las configuraciones.
+En la parte inferior o final de la página web pódrás encontrar el link que te llevará a Matlab con todos los scripts que realizan los cálculos, simulaciones y gráficas necesarias para el desarrollo de este ejercicio.
