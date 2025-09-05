@@ -36,7 +36,6 @@
     transition: background-color 0.5s ease, color 0.5s ease;
     display: flex;
   }
-  /* Menú lateral */
   #sidebar {
     position: fixed;
     top: 0;
@@ -76,7 +75,6 @@
     color: var(--color-links-hover);
     background-color: rgba(0, 123, 204, 0.1);
   }
-  /* Botón flecha para abrir/cerrar menú */
   #toggle-btn {
     position: absolute;
     top: 10px;
@@ -133,7 +131,6 @@
     height: auto;
     display: inline-block;
   }
-  /* Autores */
   #autores {
     font-style: italic;
     color: #555;
@@ -145,7 +142,6 @@
   [data-theme="dark"] #autores {
     color: #bbb;
   }
-  /* Botón modo oscuro */
   #btn-toggle-theme {
     position: fixed;
     bottom: 25px;
@@ -167,7 +163,6 @@
 </style>
 </head>
 <body>
-
 <div id="sidebar">
   <button id="toggle-btn" aria-label="Alternar menú" title="Abrir menú">&#9654;</button> <!-- flecha derecha inicialmente -->
   <nav>
@@ -177,20 +172,17 @@
     <a href="#documentacion" title="Documentación">Documentación</a>
   </nav>
 </div>
-
 <div id="main-content">
   <h1>Simulación y Cálculos del Mecanismo de 4 Barras</h1>
   <div id="autores">
     Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive
   </div>
-
   <section id="introduccion">
     <h2>Introducción</h2>
     <p>Este proyecto universitario se enfoca en el análisis cinemático de un mecanismo de cuatro barras con manivela y corredera vertical. El objetivo principal es estudiar el desplazamiento de la pieza “d” de la corredera, identificando los valores máximos y mínimos que puede alcanzar dentro de su ciclo de movimiento.</p>
     <p>Se aplican dos enfoques complementarios: el método gráfico y el método analítico. Primero, se determina el intervalo de recorrido posible para la corredera usando el método gráfico. Luego, se valida y profundiza el análisis mediante el método analítico, resolviendo ecuaciones trigonométricas para calcular ángulos y posiciones.</p>
     <p>Además, con un mismo valor del ángulo de entrada, se exploran las dos configuraciones físicamente posibles del mecanismo y se calculan para cada caso los ángulos y desplazamientos correspondientes, mostrando cómo un solo valor de entrada puede aportar soluciones múltiples. El análisis completo aporta criterios de diseño y comprensión del comportamiento de mecanismos de cuatro barras en aplicaciones reales.</p>
   </section>
-
   <section id="simulacion_calculos">
     <h2>Simulación y Cálculos - Realizados en Matlab</h2>
     <section id="simulacion_mecanismo">
@@ -217,48 +209,42 @@
       </section>
     </section>
   </section>
-
   <section id="aplicacion">
     <h2>Aplicación</h2>
   </section>
-
   <section id="documentacion">
     <h2>Documentación</h2>
     <p>Enlace para acceder a los scripts en Matlab donde se realizan los cálculos, gráficas y simulaciones respectivas al mecanismo: <br />
     <a href="https://drive.mathworks.com/sharing/8b20918a-19a0-4557-b3a3-0070ccf150a4" target="_blank" rel="noopener noreferrer" style="color: var(--color-links); text-decoration: underline;">Abrir carpeta MATLAB Drive</a></p>
   </section>
 </div>
-
 <button id="btn-toggle-theme" aria-label="Cambiar tema">Modo oscuro</button>
-
 <script>
-// Toggle menú con flecha y cambio de dirección
 const sidebar = document.getElementById('sidebar');
 const toggleBtn = document.getElementById('toggle-btn');
 
-toggleBtn.addEventListener('click', () => {
-  sidebar.classList.toggle('collapsed');
+function actualizarIcono() {
   if (sidebar.classList.contains('collapsed')) {
-    toggleBtn.innerHTML = '&#9654;'; // flecha derecha para abrir
+    toggleBtn.innerHTML = '&#9654;';
     toggleBtn.title = 'Abrir menú';
   } else {
-    toggleBtn.innerHTML = '&#9664;'; // flecha izquierda para cerrar
+    toggleBtn.innerHTML = '&#9664;';
     toggleBtn.title = 'Cerrar menú';
   }
+}
+actualizarIcono();
+toggleBtn.addEventListener('click', () => {
+  sidebar.classList.toggle('collapsed');
+  actualizarIcono();
 });
-
-// Inicializa icono acorde al estado (abierto inicialmente)
 if (!sidebar.classList.contains('collapsed')) {
   toggleBtn.innerHTML = '&#9664;';
   toggleBtn.title = 'Cerrar menú';
 }
-
-// Modo oscuro toggle
 const btnToggleTheme = document.getElementById('btn-toggle-theme');
 const currentTheme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-theme', currentTheme);
 btnToggleTheme.textContent = currentTheme === 'dark' ? 'Modo claro' : 'Modo oscuro';
-
 btnToggleTheme.addEventListener('click', () => {
   let theme = document.documentElement.getAttribute('data-theme');
   if (theme === 'dark') {
@@ -271,8 +257,6 @@ btnToggleTheme.addEventListener('click', () => {
     localStorage.setItem('theme', 'dark');
   }
 });
-
-// Resaltar enlace activo con scroll
 const navLinks = sidebar.querySelectorAll('nav a');
 window.addEventListener('scroll', () => {
   let current = '';
@@ -290,6 +274,5 @@ window.addEventListener('scroll', () => {
   });
 });
 </script>
-
 </body>
 </html>
