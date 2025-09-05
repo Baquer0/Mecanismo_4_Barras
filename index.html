@@ -1,67 +1,128 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <title>Simulación de Mecanismo 4 Barras - Proyecto</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-        body {
-            font-family: 'Roboto', Arial, sans-serif;
-            margin: 40px;
-            background-color: #f4f4f9;
-            color: #333;
-            line-height: 1.6;
-        }
-        h1, h2 {
-            color: #005f9e;
-        }
-        nav {
-            position: sticky;
-            top: 0;
-            background: #f4f4f9;
-            padding: 15px 0;
-            border-bottom: 1px solid #ccc;
-            z-index: 100;
-            margin-bottom: 30px;
-        }
-        nav a {
-            margin-right: 20px;
-            text-decoration: none;
-            color: #007acc;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-        nav a:hover {
-            color: #003d66;
-            text-decoration: underline;
-        }
-        section {
-            margin-bottom: 40px;
-        }
-        pre {
-            background-color: #e5e7eb;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-            box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
-        }
-        img.simulacion {
-            max-width: 100%;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-            margin-top: 15px;
-        }
-    </style>
+<meta charset="UTF-8" />
+<title>Simulación de Mecanismo 4 Barras - Proyecto</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    overflow: hidden;
+  }
+  #navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: 60px;
+    background: #f4f4f9;
+    border-bottom: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    z-index: 10;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+  #navbar a {
+    margin-right: 20px;
+    text-decoration: none;
+    color: #007acc;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  #navbar a.active {
+    color: #005f9e;
+    text-decoration: underline;
+  }
+  #navbar a:hover {
+    color: #003d66;
+  }
+  #container {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    overflow: hidden;
+    padding-top: 60px; /* espacio para navbar */
+    box-sizing: border-box;
+  }
+  section {
+    position: absolute;
+    top: 60px;
+    left: 100vw;
+    width: 100vw;
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    padding: 40px;
+    box-sizing: border-box;
+    background: white;
+    transition: left 0.5s ease;
+  }
+  section.active {
+    left: 0;
+  }
+  section.left {
+    left: -100vw;
+  }
+  h1, h2 {
+    color: #005f9e;
+  }
+  pre {
+    background-color: #e5e7eb;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    box-shadow: 1px 1px 4px rgba(0,0,0,0.1);
+  }
+  img.simulacion {
+    max-width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    margin-top: 15px;
+  }
+  img.responsive-img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin-top: 10px;
+    height: auto;
+  }
+  p.creator {
+    font-style: italic;
+    color: #555;
+    margin-top: -10px;
+  }
+  /* Click zones for navigation */
+  .click-zone {
+    position: fixed;
+    top: 60px; /* debajo del navbar */
+    bottom: 0;
+    width: 15%;
+    cursor: pointer;
+    z-index: 20;
+  }
+  .click-zone.left {
+    left: 0;
+  }
+  .click-zone.right {
+    right: 0;
+  }
+</style>
 </head>
 <body>
+
+<nav id="navbar">
+    <a href="#" data-index="0" class="active">Introducción</a>
+    <a href="#" data-index="1">Simulación y Cálculos</a>
+    <a href="#" data-index="2">Aplicación</a>
+    <a href="#" data-index="3">Documentación</a>
+    <a href="#" data-index="4">Contacto</a>
+</nav>
+
+<div id="container">
+  <section id="introduccion" class="active">
     <h1>Simulación y Cálculos del Mecanismo de 4 Barras</h1>
-    <p style="font-style: italic; color: #555; margin-top: -10px;">Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive</p>
-    <nav>
-        <a href="#introduccion">Introducción</a>
-        <a href="#simulacion_calculos">Simulación</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
-    <section id="introduccion">
+    <p class="creator">Creado por: David Quiñones Angarita y Juan Sebastian Baquero Piraquive</p>
     <h2>Introducción</h2>
     <p>
         Este proyecto universitario se enfoca en el <strong>análisis cinemático de un mecanismo de cuatro barras con manivela y corredera vertical</strong>. El objetivo principal es estudiar el desplazamiento de la pieza “d” de la corredera, identificando los valores máximos y mínimos que puede alcanzar dentro de su ciclo de movimiento.
@@ -72,39 +133,100 @@
     <p>
         Además, con un mismo valor del ángulo de entrada, se exploran las <strong>dos configuraciones físicamente posibles del mecanismo</strong> y se calculan para cada caso los ángulos y desplazamientos correspondientes, mostrando cómo un solo valor de entrada puede aportar soluciones múltiples. El análisis completo aporta criterios de diseño y comprensión del comportamiento de mecanismos de cuatro barras en aplicaciones reales.
     </p>
-    </section>
-    <section id="simulacion_calculos">
-  <h2>Simulación y Cálculos - Realizados en Matlab</h2>  
-  <section id="simulacion_mecanismo">
-    <h3>Simulación del mecanismo - Hecha en Matlab</h3>
-    <p>A continuación se presenta la animación generada a partir de la simulación en MATLAB del mecanismo de cuatro barras:</p>
-    <img src="Imagenes/simulacion_mecanismo.gif" alt="Simulación del mecanismo en MATLAB" class="simulacion" />
   </section>
-  <section id="calculos_posiciones_extremas">
-    <h3>Cálculos posiciones extremas y desplazamientos de d</h3>
-    <section id="posiciones_maximas">
-  <h4>Posiciones máximas y desplazamiento realizado por d</h4>
-  <img src="Imagenes/calculos_posicion_maxima.png" alt="Cálculos posición máxima realizados en MATLAB" style="max-width: 100%; border-radius: 8px; margin-top: 10px; height: auto;">
-</section>
-<section id="grafica_primera_configuracion">
-  <h4>Gráfica de la primera configuración para θ2 = 305°</h4>
-  <img src="Imagenes/grafica_primera_configuracion.png" alt="Gráfica primera configuración para θ2 = 305°" style="max-width: 100%; border-radius: 8px; margin-top: 10px;">
-</section>
-<section id="grafica_segunda_configuracion">
-  <h4>Gráfica de la segunda configuración para θ2 = 305°</h4>
-  <img src="Imagenes/grafica_segunda_configuracion.png" alt="Gráfica segunda configuración para θ2 = 305°" style="max-width: 100%; border-radius: 8px; margin-top: 10px;">
-</section>
-</section>
-    <section id="aplicacion">
-  <h2>Aplicación</h2>
-</section>
-<section id="documentacion">
-  <h2>Documentación</h2>
-</section>
 
-    <script>
-        // Scroll suave para navegación
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', event => {
-                event.preventDefault();
-                const id = link.get
+  <section id="simulacion_calculos">
+    <h2>Simulación y Cálculos - Realizados en Matlab</h2>
+    <section id="simulacion_mecanismo">
+      <h3>Simulación del mecanismo - Hecha en Matlab</h3>
+      <p>A continuación se presenta la animación generada a partir de la simulación en MATLAB del mecanismo de cuatro barras:</p>
+      <img src="Imagenes/simulacion_mecanismo.gif" alt="Simulación del mecanismo en MATLAB" class="simulacion" />
+    </section>
+    <section id="calculos_posiciones_extremas">
+      <h3>Cálculos posiciones extremas y desplazamientos de d</h3>
+      <section id="posiciones_maximas">
+        <h4>Posiciones máximas y desplazamiento realizado por d</h4>
+        <img src="Imagenes/calculos_posicion_maxima.png" alt="Cálculos posición máxima realizados en MATLAB" class="responsive-img">
+      </section>
+      <section id="grafica_primera_configuracion">
+        <h4>Gráfica de la primera configuración para θ2 = 305°</h4>
+        <img src="Imagenes/grafica_primera_configuracion.png" alt="Gráfica primera configuración para θ2 = 305°" class="responsive-img">
+      </section>
+      <section id="grafica_segunda_configuracion">
+        <h4>Gráfica de la segunda configuración para θ2 = 305°</h4>
+        <img src="Imagenes/grafica_segunda_configuracion.png" alt="Gráfica segunda configuración para θ2 = 305°" class="responsive-img">
+      </section>
+    </section>
+  </section>
+
+  <section id="aplicacion">
+    <h2>Aplicación</h2>
+  </section>
+
+  <section id="documentacion">
+    <h2>Documentación</h2>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto</h2>
+    <p>Creado por: Tu Nombre</p>
+    <p>Correo: tu_email@ejemplo.com</p>
+  </section>
+</div>
+
+<div class="click-zone left"></div>
+<div class="click-zone right"></div>
+
+<script>
+  const sections = document.querySelectorAll('#container > section');
+  const navLinks = document.querySelectorAll('#navbar a');
+  const leftZone = document.querySelector('.click-zone.left');
+  const rightZone = document.querySelector('.click-zone.right');
+  let currentIndex = 0;
+  const totalSections = sections.length;
+
+  function updateSections(index) {
+    sections.forEach((sec, i) => {
+      sec.classList.remove('active', 'left');
+      if (i === index) {
+        sec.classList.add('active');
+        sec.style.left = '0';
+      } else if (i < index) {
+        sec.classList.add('left');
+        sec.style.left = '-100vw';
+      } else {
+        sec.style.left = '100vw';
+      }
+    });
+    navLinks.forEach((link, i) => {
+      link.classList.toggle('active', i === index);
+    });
+    currentIndex = index;
+  }
+
+  navLinks.forEach((link, index) => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      updateSections(index);
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight') {
+      updateSections((currentIndex + 1) % totalSections);
+    } else if (e.key === 'ArrowLeft') {
+      updateSections((currentIndex - 1 + totalSections) % totalSections);
+    }
+  });
+
+  leftZone.addEventListener('click', () => {
+    updateSections((currentIndex - 1 + totalSections) % totalSections);
+  });
+
+  rightZone.addEventListener('click', () => {
+    updateSections((currentIndex + 1) % totalSections);
+  });
+</script>
+
+</body>
+</html>
